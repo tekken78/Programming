@@ -1,4 +1,4 @@
-//Delete all occurances of the given key
+//Delete a node at a given position
 #include<bits/stdc++.h>
 using namespace std;
 struct Node{
@@ -16,25 +16,28 @@ void push(Node** head, int n){
     (*head) = new_node; 
 }
 
-void deleteKey(Node** head, int key){
+void deletePosition(Node** head, int pos){
     Node* curr = *head;
     Node* prev = NULL;
-    while(curr!=NULL && curr->data == key){
+    if(curr==NULL){
+            cout<<"The linked list is already empty!!\n";
+            return;
+        }
+    if(pos==1){        
         *head = curr->next;
         delete curr;
-        curr = *head;
-    }    
-    while(curr!=NULL){
-        if(curr->data == key){
-            prev->next = curr->next;
-            delete(curr);
-            curr= prev->next;
-        }
-        else{
-            prev = curr;
-            curr= curr->next;
-        }
+        return;
     }
+    for(int i=1;i<pos;i++){
+        if(curr->next==NULL){
+            cout<<"Not enough elements in the linked list!!\n";
+            return;
+        }
+        prev = curr;
+        curr= curr->next;
+    }
+    prev->next = curr->next;
+    delete curr;
 }
 
 void printLinkedList(Node* head){
@@ -59,9 +62,8 @@ int main(){
         push(&head, n);
     }
     printLinkedList(head);
-    int key;
-    cin>>key;
-    deleteKey(&head, key);
-    printLinkedList(head);
-    
+    int pos;
+    cin>>pos;
+    deletePosition(&head, pos);
+    printLinkedList(head);    
 }

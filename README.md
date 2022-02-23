@@ -1,1 +1,1 @@
-This repository contains implementation of the commonly asked algorithms in interviews.
+This repository contains implementation of the commonly asked data structures questions and algorithms in interviews.
